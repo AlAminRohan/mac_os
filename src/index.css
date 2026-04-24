@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.welcome-text {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  transition: transform 220ms ease, text-shadow 220ms ease, letter-spacing 220ms ease;
+}
+
+.welcome-text:hover {
+  transform: translateY(-4px) scale(1.03);
+  letter-spacing: 0.05em;
+  text-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+}
+
+.dock-item {
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
