@@ -10,7 +10,7 @@ import ResumePage from './pages/ResumePage'
 function App() {
   const location = useLocation()
   const navigate = useNavigate()
-  const [theme, setTheme] = useState('dark')
+  const [themeMode, setThemeMode] = useState('system')
   const [clockText, setClockText] = useState('')
   const showProjectsModal = useMemo(() => location.pathname === '/projects', [location.pathname])
 
@@ -34,15 +34,29 @@ function App() {
   }, [])
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const applyTheme = () => {
+      if (themeMode === 'system') {
+        document.documentElement.setAttribute('data-theme', mediaQuery.matches ? 'dark' : 'light')
+        return
+      }
+
+      document.documentElement.setAttribute('data-theme', themeMode)
+    }
+
+    applyTheme()
+    mediaQuery.addEventListener('change', applyTheme)
+
+    return () => mediaQuery.removeEventListener('change', applyTheme)
+  }, [themeMode])
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-slate-700 via-slate-800 to-slate-950">
       <TopBar
         onOpenProjects={() => navigate('/projects')}
-        theme={theme}
-        onToggleTheme={() => setTheme((current) => (current === 'dark' ? 'cupcake' : 'dark'))}
+        themeMode={themeMode}
+        onChangeThemeMode={setThemeMode}
         clockText={clockText}
       />
 
