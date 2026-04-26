@@ -56,7 +56,7 @@ function ProjectsModal({ onClose }) {
         style={{ left: position.x, top: position.y }}
       >
         <div
-          className="flex cursor-move select-none items-center justify-between bg-zinc-800/90 px-4 py-3"
+          className="flex cursor-grab select-none items-center justify-between bg-zinc-800/90 px-4 py-3"
           onMouseDown={handleDragStart}
         >
           <div className="flex items-center gap-2 text-xs">
